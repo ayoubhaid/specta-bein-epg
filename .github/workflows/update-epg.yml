@@ -1,0 +1,45 @@
+name: Update beIN MENA JSON EPG
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-bein-epg
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate JSON EPG
+        run: node scraper.mjs
+        env:
+          EPG_DAYS: "5"
+          REQUEST_DELAY_MS: "300"
+          EPG_OUTPUT: "docs/bein-epg.json"
+
+      - name: Commit updated feed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/bein-epg.json
+          if git diff --staged --quiet; then
+            echo "No EPG changes to commit"
+          else
+            git commit -m "Update beIN MENA JSON EPG"
+            git push
+          fi
