@@ -6,7 +6,7 @@
   "apiBase": "https://www.beinsports.com/api/opta",
   "region": "en-mena",
   "timezone": "UTC",
-  "generatedAt": "2026-11-07T20:21:51.952Z",
+  "generatedAt": "2026-11-07T21:00:38.588Z",
   "coverage": {
     "daysRequested": 5,
     "channelsFound": 40,
