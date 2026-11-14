@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "description": "Example mapping only. Replace with reviewed mappings for the private Specta inventory.",
+  "mappings": [
+    {
+      "inventoryId": "specta-channel-001",
+      "provider": "bein_mena",
+      "providerChannelId": "REPLACE_WITH_SOURCE_CHANNEL_ID",
+      "matchMethod": "manual",
+      "confidence": 1.0,
+      "reviewed": false
+    }
+  ]
+}
